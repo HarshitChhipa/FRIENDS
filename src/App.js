@@ -7,6 +7,9 @@ class App extends Component {
         super();
 
         this.state = {
+
+            newFreiends: '',
+
             friendsList: [
                 {
                     id: 1,
@@ -28,10 +31,38 @@ class App extends Component {
         };
 
         this.handelChange = this.handelChange.bind(this);
+        this.addFriend = this.addFriend.bind(this);
+        this.enterPressed = this.enterPressed.bind(this);
 
     }
 
-    handelChange() {
+    enterPressed(event) {
+        var code = event.keyCode || event.which;
+        if (code === 13) {
+            this.addFriend()
+        }
+    }
+
+    handelChange(event) {
+        this.setState({
+            newFreiends: event.target.value
+        });
+    }
+
+    addFriend() {
+
+        const newFriend = {
+            name: this.state.newFreiends,
+            id: this.state.friendsList[this.state.friendsList.length - 1].id + 1
+        };
+
+        const tempFriendList = this.state.friendsList;
+
+        tempFriendList.push(newFriend);
+
+        this.setState({
+            friendsList: tempFriendList
+        })
 
     }
 
@@ -41,9 +72,12 @@ class App extends Component {
                 <div className="container">
                     <input
                         type="text"
+                        name="friendsEntry"
                         className="my-4 form-control"
                         placeholder="Type the name of a friend"
                         onChange={this.handelChange}
+                        onKeyPress={this.enterPressed}
+                        value={this.setState.newFreiends}
                     />
                     <ul className="list-group">
                         {this.state.friendsList.map((item) => {
