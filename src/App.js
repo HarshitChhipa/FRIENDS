@@ -47,18 +47,24 @@ class App extends Component {
         this.setState({
             newFreiends: event.target.value
         });
+        // console.log('This is State of the Component', this.state);
     }
 
     addFriend() {
 
         const newFriend = {
-            name: this.state.newFreiends,
-            id: this.state.friendsList[this.state.friendsList.length - 1].id + 1
+            id: this.state.friendsList[this.state.friendsList.length - 1].id + 1,
+            friendsName: this.state.newFreiends
         };
+        // console.log('This is newFriendList', newFriend);
 
         const tempFriendList = this.state.friendsList;
 
+        // console.log('This is temp FriendLIst', tempFriendList);
+
         tempFriendList.push(newFriend);
+
+        // console.log('This is temp FriendLIst', tempFriendList);
 
         this.setState({
             friendsList: tempFriendList
